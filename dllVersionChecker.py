@@ -112,8 +112,36 @@ class Testcase(unittest.TestCase):
 
 # ----------------------------------------------------------------------------------------------------------------
 
-# ---- here comes the execution of the unit-tests ----
-if __name__ == '__main__':
-    unittest.main()
+def createGUI():
+    from PyQt5.QtWidgets import QApplication \
+        , QWidget \
+        , QPushButton \
+        , QVBoxLayout \
+        , QSpacerItem
+
+    app = QApplication([])
+    app.setApplicationName("GUI for the DllVersionChecker")
+    window = QWidget()
+    layout = QVBoxLayout()
+    layout.addWidget(QPushButton("Select directory to check"))
+    spacer = QSpacerItem(400, 1) # else it shrinks to minimum width
+    layout.addSpacerItem(spacer)
+    window.setLayout(layout)
+    window.show()
+    app.exec()
 
 # ----------------------------------------------------------------------------------------------------------------
+
+
+
+# ---- here comes the execution of the unit-tests ----
+# todo handle here the arguments: in case of arg "gui" create gui, in case of "unittests" run them,
+#  else wait for input for the path to check (and print to stdout)
+if __name__ == '__main__':
+    # disabled for now
+    # unittest.main()
+    createGUI()
+
+# ----------------------------------------------------------------------------------------------------------------
+
+createGUI()
