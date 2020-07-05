@@ -136,13 +136,29 @@ def createGUI():
 
 
 # ---- here comes the execution of the unit-tests ----
-# todo handle here the arguments: in case of arg "gui" create gui, in case of "unittests" run them,
-#  else wait for input for the path to check (and print to stdout)
-if __name__ == '__main__':
-    # disabled for now
-    # unittest.main()
-    createGUI()
+# if __name__ == '__main__':
+#     unittest.main()
+#     createGUI()
 
 # ----------------------------------------------------------------------------------------------------------------
 
-createGUI()
+# time to add some command line-parsing: learning by doing - no separate project, just use this good boi:
+# hints taken from: https://stackabuse.com/command-line-arguments-in-python/
+
+import getopt, sys
+full_cmd_arguments = sys.argv
+argument_list = full_cmd_arguments[1:] # starting at one
+print(argument_list)
+
+# plan for now: differentiate between gui, running tests, or just parameter-steered
+short_options = "gtp:"
+long_options = ["gui", "test", "path"]
+
+try:
+    arguments, values = getopt.getopt(argument_list, short_options, long_options)
+except getopt.error as err:
+    print(f"error: {err}")
+    sys.exit(2)
+
+print(f"arguments: {arguments}")
+print(f"values: {values}")
