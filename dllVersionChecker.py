@@ -55,6 +55,7 @@ class DllVersionProcessor:
 
     @staticmethod
     def getVersionString(filename):
+        # requirement: "$ pip install pywin32"
         # inspiration taken from: http://timgolden.me.uk/python/win32_how_do_i/get_dll_version.html
         from win32api import GetFileVersionInfo, LOWORD, HIWORD
 
@@ -90,16 +91,16 @@ class Testcase(unittest.TestCase):
         resultDict = processor.getDictionaryOfFileVersions()
         self.assertEqual(len(resultDict), 0)
 
-    def test_DllVersionProcessor_sdkDir(self):
-        #directory = "C:/Program Files/Instrument Systems/LumiSuite"
-        directory = "C:/Program Files/Instrument Systems/LumiSuite SDK"
-        processor = DllVersionProcessor(directory, "*.dll")
-        resultDict = processor.getDictionaryOfFileVersions()
-        print("----------------------------------------------")
-        print(f"result for the directory '{directory}'")
-        [print(key, ":", value) for key, value in resultDict.items()] # print line by line
-        print("----------------------------------------------")
-        self.assertTrue(1 == 1) # nothing to do here ..
+    # def test_DllVersionProcessor_sdkDir(self):
+    #     #directory = "C:/Program Files/Instrument Systems/LumiSuite"
+    #     directory = "C:/Program Files/Instrument Systems/LumiSuite SDK"
+    #     processor = DllVersionProcessor(directory, "*.dll")
+    #     resultDict = processor.getDictionaryOfFileVersions()
+    #     print("----------------------------------------------")
+    #     print(f"result for the directory '{directory}'")
+    #     [print(key, ":", value) for key, value in resultDict.items()] # print line by line
+    #     print("----------------------------------------------")
+    #     self.assertTrue(1 == 1) # nothing to do here ..
 
     def test_getVersionString(self):
         result = DllVersionProcessor.getVersionString("C:\Windows\\twain_32.dll")
